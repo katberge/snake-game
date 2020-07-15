@@ -18,10 +18,20 @@ document.addEventListener("DOMContentLoaded", () => {
             c.stroke();
             c.fill();
         };
+        this.update = () => {
+            c.clearRect(this.x - 2 * this.r, this.y - 2 * this.r, this.x, this.y);
+            this.y += 5;
+            this.draw();
+        }
     };
 
     // draw new circle in center of canvas
     let circle = new Circle(canvas.width / 2, canvas.height / 2);
     circle.draw();
+
+    // set interval for movement
+    let interval = setInterval(() => {
+        circle.update();
+    }, 1000)
 
 });

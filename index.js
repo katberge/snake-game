@@ -39,13 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
         this.update = () => {
             c.clearRect(this.x - 1.5 * this.r, this.y - 1.5 * this.r, 15, 15);
             if (movement == "down") {
-                this.y += 5;
+                this.y += 1;
             } else if (movement == "up") {
-                this.y -= 5;
+                this.y -= 1;
             } else if (movement == "left") {
-                this.x -= 5;
+                this.x -= 1;
             } else {
-                this.x += 5;
+                this.x += 1;
             }
             this.draw();
         }
@@ -56,8 +56,10 @@ document.addEventListener("DOMContentLoaded", () => {
     circle.draw();
 
     // set interval for movement
-    let interval = setInterval(() => {
+    const animate = () => {
+        requestAnimationFrame(animate);
         circle.update();
-    }, 1000)
+    };
+    animate();
 
 });

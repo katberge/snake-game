@@ -7,6 +7,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // set height of canavs to 400px
     canvas.height = 400;
 
+    // add key interactivity
+    let movement = "down";
+    let control = (e) => {
+        if (e.keyCode == 37) {
+            movement = "left";
+        }
+        if (e.keyCode == 38) {
+            movement = "up";
+        }
+        if (e.keyCode == 39) {
+            movement = "right";
+        }
+        if (e.keyCode == 40) {
+            movement = "down";
+        }
+    };
+    document.addEventListener("keyup", control);
+
     // add a circle constructor
     function Circle(x, y) {
         this.x = x;
@@ -20,7 +38,15 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         this.update = () => {
             c.clearRect(this.x - 2 * this.r, this.y - 2 * this.r, this.x, this.y);
-            this.y += 5;
+            if (movement == "down") {
+                this.y += 5;
+            } else if (movement == "up") {
+                this.y -= 5;
+            } else if (movement == "left") {
+                this.x -= 5;
+            } else {
+                this.x += 5;
+            }
             this.draw();
         }
     };

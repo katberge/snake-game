@@ -25,15 +25,21 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     document.addEventListener("keyup", control);
 
+    // color palette
+    const colors = ["#f969b2", "#dcc147", "#1cba6f", "#21d0aa", "#16498a", "#2f2489", "#ef8429", "#e66e70", "#b11620", "#933153", "#2a374a"];
+
     // add a circle constructor
-    function Circle(x, y) {
+    function Circle(x, y, color) {
         this.x = x;
         this.y = y;
+        this.color = color;
         this.r = 5; // radius
         this.draw = () => {
             c.beginPath();
             c.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
+            c.strokeStyle = this.color;
             c.stroke();
+            c.fillStyle = this.color;
             c.fill();
         };
         this.update = () => {
@@ -52,13 +58,20 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // draw new circle in center of canvas
-    let circle = new Circle(canvas.width / 2, canvas.height / 2);
-    circle.draw();
+    let thisColor = Math.floor(Math.random() * colors.length);
+    let controlCircle = new Circle(canvas.width / 2, canvas.height / 2, colors[thisColor]);
+
+    // make new circle
+    const makeCircle = () => {
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height;
+        let index = Math.floor(Math.random() * colors.length);
+    }
 
     // set interval for movement
     const animate = () => {
         requestAnimationFrame(animate);
-        circle.update();
+        controlCircle.update();
     };
     animate();
 

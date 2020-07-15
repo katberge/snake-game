@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
             c.fill();
         };
         this.update = () => {
-            c.clearRect(this.x - 2 * this.r, this.y - 2 * this.r, this.x, this.y);
+            c.clearRect(this.x - 1.5 * this.r, this.y - 1.5 * this.r, 15, 15);
             if (movement == "down") {
                 this.y += 5;
             } else if (movement == "up") {

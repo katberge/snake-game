@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
             c.fill();
         };
         this.update = () => {
-            c.clearRect(this.x - 1.5 * this.r, this.y - 1.5 * this.r, 15, 15);
             if (movement == "down") {
                 this.y += 1;
             } else if (movement == "up") {
@@ -91,7 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // set interval for movement
     const animate = () => {
         requestAnimationFrame(animate);
+        c.clearRect(0, 0, canvas.width, canvas.height);
         controlCircle.update();
+        newCircle.draw();
     };
     animate();
 

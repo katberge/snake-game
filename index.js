@@ -11,16 +11,24 @@ document.addEventListener("DOMContentLoaded", () => {
     let movement = "down";
     let control = (e) => {
         if (e.keyCode == 37) {
-            movement = "left";
+            if (player.length == 1 || movement !== "right") {
+                movement = "left";
+            }
         }
         if (e.keyCode == 38) {
-            movement = "up";
+            if (player.length == 1 || movement !== "down") {
+                movement = "up";
+            }
         }
         if (e.keyCode == 39) {
-            movement = "right";
+            if (player.length == 1 || movement !== "left") {
+                movement = "right";
+            }
         }
         if (e.keyCode == 40) {
-            movement = "down";
+            if (player.length == 1 || movement !== "up") {
+                movement = "down";
+            }
         }
     };
     document.addEventListener("keyup", control);

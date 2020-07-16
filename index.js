@@ -28,12 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // color palette
     const colors = ["#f969b2", "#dcc147", "#1cba6f", "#21d0aa", "#16498a", "#2f2489", "#ef8429", "#e66e70", "#b11620", "#933153", "#2a374a"];
 
+    let r = 5;
     // add a circle constructor
     function Circle(x, y, color) {
         this.x = x;
         this.y = y;
         this.color = color;
-        this.r = 5; // radius
+        this.r = r; // radius
         this.draw = () => {
             c.beginPath();
             c.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
@@ -62,11 +63,15 @@ document.addEventListener("DOMContentLoaded", () => {
     let controlCircle = new Circle(canvas.width / 2, canvas.height / 2, colors[thisColor]);
 
     // make new circle
+    let newCircle;
     const makeCircle = () => {
-        let x = Math.random() * canvas.width;
-        let y = Math.random() * canvas.height;
+        let x = (Math.random() * (canvas.width - 2 * r)) + r;
+        let y = (Math.random() * (canvas.height - 2 * r)) + r;
         let index = Math.floor(Math.random() * colors.length);
+        newCircle = new Circle(x, y, colors[index]);
     }
+    makeCircle();
+    newCircle.draw();
 
     // set interval for movement
     const animate = () => {

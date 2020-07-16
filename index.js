@@ -68,9 +68,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
     };
 
+    // create player array to add circles to
+    const player = [];
+
     // draw new circle in center of canvas
     let thisColor = Math.floor(Math.random() * colors.length);
     let controlCircle = new Circle(canvas.width / 2, canvas.height / 2, colors[thisColor]);
+    player.push(controlCircle);
 
     // make new circle
     let newCircle;
@@ -87,11 +91,32 @@ document.addEventListener("DOMContentLoaded", () => {
     makeCircle();
     newCircle.draw();
 
+    // create function to attach circle to the player string
+    const attatch = (circle) => {
+        let previous = player[player.length - 1];
+        if (movement == "down") {
+            circle.x = previous.x;
+            circle.y = previous.y + 2 * r;
+        } else if (movement == "up") {
+            circle.x = previous.x;
+            circle.y = previous.y - 2 * r;
+        } else if (movement == "left") {
+            circle.y = previous.y;
+            circle.x = previous.x + 2 * r;
+        } else {
+            circle.y = previous.y;
+            circle.x = previous.x - 2 * r;
+        }
+        circle.draw();
+    };
+
     // check collision
     const collisionCheck = () => {
         if (getDistance(newCircle.x, newCircle.y, controlCircle) < 2 * r) {
             let cover = new Circle(newCircle.x, newCircle.y, "white");
             cover.draw();
+            attatch(newCircle);
+            player.push(newCircle);
             makeCircle();
         }
     };
@@ -100,7 +125,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const animate = () => {
         requestAnimationFrame(animate);
         c.clearRect(0, 0, canvas.width, canvas.height);
-        controlCircle.update();
+        player.map(circle => {
+            circle.update();  
+        })
         newCircle.draw();
         collisionCheck();
     };

@@ -174,11 +174,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     };
+
+    // get new game button and add functionality
+    let newGameBtn = document.querySelector("button");
+    newGameBtn.addEventListener("click", () => {
+        location.reload(); // reloads page
+    });
+
     // stop game if game over is true
     const stopGame = () => {
         c.fillStyle = "rgb(0, 0, 0, 0.3)";
         c.fillRect(0, 0, canvas.width, canvas.height);
         clearInterval(interval);
+        document.querySelector("#game-over").style.display = "block";
     };
 
 });

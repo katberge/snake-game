@@ -139,7 +139,46 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         newCircle.draw();
         collisionCheck();
+        gameOver();
     };
     let interval = setInterval(animate, 300);
+
+    // check game over function
+    const gameOver = () => {
+        // variable for if any of the tests are positive
+        let answer;
+
+        // if control circle hits wall
+        if (movement == "down" && canvas.height - controlCircle.y < r) {
+            answer = true;
+        }
+        if (movement == "up" && controlCircle.y < r) {
+            answer = true;
+        }
+        if (movement == "left" && controlCircle.x < r) {
+            answer = true;
+        }
+        if (movement == "right" && canvas.width - controlCircle.x < r) {
+            answer = true;
+        }
+
+        // if control circle hits player/its tail
+        for (i = 1; i < player.length; i++) {
+            let distance = getDistance(player[i].x, player[i].y , controlCircle);
+            if (distance < 2 * r) {
+                answer = true;
+            }
+        }
+        if (answer == true) {
+            stopGame();
+        }
+
+    };
+    // stop game if game over is true
+    const stopGame = () => {
+        c.fillStyle = "rgb(0, 0, 0, 0.3)";
+        c.fillRect(0, 0, canvas.width, canvas.height);
+        clearInterval(interval);
+    };
 
 });

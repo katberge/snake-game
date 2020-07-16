@@ -58,6 +58,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // get distance between circles
+    const getDistance = (x, y, circle) => {
+        let x1 = x;
+        let x2 = circle.x;
+        let xDiff = x2 - x1;
+        let y1 = y;
+        let y2 = circle.y;
+        let yDiff = y2 - y1;
+        return Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
+    };
+
     // draw new circle in center of canvas
     let thisColor = Math.floor(Math.random() * colors.length);
     let controlCircle = new Circle(canvas.width / 2, canvas.height / 2, colors[thisColor]);
@@ -67,6 +78,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const makeCircle = () => {
         let x = (Math.random() * (canvas.width - 2 * r)) + r;
         let y = (Math.random() * (canvas.height - 2 * r)) + r;
+        while (getDistance(x, y, controlCircle) <= 2 * r) { // don't allow new circle to overlap control circle
+            x = (Math.random() * (canvas.width - 2 * r)) + r;
+            y = (Math.random() * (canvas.height - 2 * r)) + r;
+        }
         let index = Math.floor(Math.random() * colors.length);
         newCircle = new Circle(x, y, colors[index]);
     }

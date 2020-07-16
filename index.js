@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         this.y = y;
         this.color = color;
         this.r = r; // radius
+        this.direction = movement;
         this.draw = () => {
             c.beginPath();
             c.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
@@ -44,14 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
             c.fill();
         };
         this.update = () => {
-            if (movement == "down") {
-                this.y += 1;
-            } else if (movement == "up") {
-                this.y -= 1;
-            } else if (movement == "left") {
-                this.x -= 1;
+            if (this.direction == "down") {
+                this.y += 10;
+            } else if (this.direction == "up") {
+                this.y -= 10;
+            } else if (this.direction == "left") {
+                this.x -= 10;
             } else {
-                this.x += 1;
+                this.x += 10;
             }
             this.draw();
         }
@@ -94,13 +95,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // create function to attach circle to the player string
     const attatch = (circle) => {
         let previous = player[player.length - 1];
-        if (movement == "down") {
-            circle.x = previous.x;
-            circle.y = previous.y + 2 * r;
-        } else if (movement == "up") {
+        if (previous.direction == "down") {
             circle.x = previous.x;
             circle.y = previous.y - 2 * r;
-        } else if (movement == "left") {
+        } else if (previous.direction == "up") {
+            circle.x = previous.x;
+            circle.y = previous.y + 2 * r;
+        } else if (previous.direction == "left") {
             circle.y = previous.y;
             circle.x = previous.x + 2 * r;
         } else {
@@ -123,14 +124,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // set interval for movement
     const animate = () => {
-        requestAnimationFrame(animate);
         c.clearRect(0, 0, canvas.width, canvas.height);
+        for (i = player.length - 1; i > 0; i--) {
+            player[i].direction = player[i - 1].direction;
+        }
+        controlCircle.direction = movement;
         player.map(circle => {
             circle.update();  
         })
         newCircle.draw();
         collisionCheck();
     };
-    animate();
+    let interval = setInterval(animate, 300);
 
 });

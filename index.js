@@ -87,12 +87,22 @@ document.addEventListener("DOMContentLoaded", () => {
     makeCircle();
     newCircle.draw();
 
+    // check collision
+    const collisionCheck = () => {
+        if (getDistance(newCircle.x, newCircle.y, controlCircle) < 2 * r) {
+            let cover = new Circle(newCircle.x, newCircle.y, "white");
+            cover.draw();
+            makeCircle();
+        }
+    };
+
     // set interval for movement
     const animate = () => {
         requestAnimationFrame(animate);
         c.clearRect(0, 0, canvas.width, canvas.height);
         controlCircle.update();
         newCircle.draw();
+        collisionCheck();
     };
     animate();
 

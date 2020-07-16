@@ -108,14 +108,11 @@ document.addEventListener("DOMContentLoaded", () => {
             circle.y = previous.y;
             circle.x = previous.x - 2 * r;
         }
-        circle.draw();
     };
 
     // check collision
     const collisionCheck = () => {
         if (getDistance(newCircle.x, newCircle.y, controlCircle) < 2 * r) {
-            let cover = new Circle(newCircle.x, newCircle.y, "white");
-            cover.draw();
             attatch(newCircle);
             player.push(newCircle);
             makeCircle();

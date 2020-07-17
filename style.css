@@ -1,6 +1,7 @@
 body {
     margin: 0;
     text-align: center;
+    font-family: Georgia, Times, 'Times New Roman', serif;
 }
 
 canvas {
@@ -9,4 +10,13 @@ canvas {
 
 #game-over {
     display: none;
+}
+
+p {
+    font-size: 20px;
+}
+
+button {
+    font-family: inherit;
+    margin-bottom: 10px;
 }

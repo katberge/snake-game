@@ -90,9 +90,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const makeCircle = () => {
         let x = Math.ceil(Math.random() * canvas.width / 10) * 10 - r;
         let y = Math.ceil(Math.random() * canvas.height / 10) * 10 - r;
-        while (getDistance(x, y, controlCircle) <= 2 * r) { // don't allow new circle to overlap control circle
-            x = Math.ceil(Math.random() * canvas.width / 10) * 10 - r;
-            y = Math.ceil(Math.random() * canvas.height / 10) * 10 - r;
+        for (let i = 0; i < player.length; i++) { // don't allow new circle to overlap player
+            if (getDistance(x, y, player[i]) < 2 * r) {
+                x = Math.ceil(Math.random() * canvas.width / 10) * 10 - r;
+                y = Math.ceil(Math.random() * canvas.height / 10) * 10 - r;
+                i = -1;
+            }
         }
         let index = Math.floor(Math.random() * colors.length);
         newCircle = new Circle(x, y, colors[index]);

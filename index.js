@@ -82,17 +82,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // draw new circle in center of canvas
     let thisColor = Math.floor(Math.random() * colors.length);
-    let controlCircle = new Circle(canvas.width / 2, canvas.height / 2, colors[thisColor]);
+    let controlCircle = new Circle(canvas.width / 2 + r, canvas.height / 2 + r, colors[thisColor]);
     player.push(controlCircle);
 
     // make new circle
     let newCircle;
     const makeCircle = () => {
-        let x = (Math.random() * (canvas.width - 2 * r)) + r;
-        let y = (Math.random() * (canvas.height - 2 * r)) + r;
+        let x = Math.ceil(Math.random() * canvas.width / 10) * 10 - r;
+        let y = Math.ceil(Math.random() * canvas.height / 10) * 10 - r;
         while (getDistance(x, y, controlCircle) <= 2 * r) { // don't allow new circle to overlap control circle
-            x = (Math.random() * (canvas.width - 2 * r)) + r;
-            y = (Math.random() * (canvas.height - 2 * r)) + r;
+            x = Math.ceil(Math.random() * canvas.width / 10) * 10 - r;
+            y = Math.ceil(Math.random() * canvas.height / 10) * 10 - r;
         }
         let index = Math.floor(Math.random() * colors.length);
         newCircle = new Circle(x, y, colors[index]);

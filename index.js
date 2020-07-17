@@ -118,12 +118,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // score variable
+    let score = 0;
     // check collision
     const collisionCheck = () => {
         if (getDistance(newCircle.x, newCircle.y, controlCircle) < 2 * r) {
             attatch(newCircle);
             player.push(newCircle);
             makeCircle();
+            score++;
+            document.querySelector("#score").innerHTML = score;
         }
     };
 

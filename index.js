@@ -11,22 +11,22 @@ document.addEventListener("DOMContentLoaded", () => {
     let movement = "down";
     let control = (e) => {
         if (e.keyCode == 37) {
-            if (player.length == 1 || movement !== "right") {
+            if (player.length == 1 || controlCircle.direction !== "right") {
                 movement = "left";
             }
         }
         if (e.keyCode == 38) {
-            if (player.length == 1 || movement !== "down") {
+            if (player.length == 1 || controlCircle.direction !== "down") {
                 movement = "up";
             }
         }
         if (e.keyCode == 39) {
-            if (player.length == 1 || movement !== "left") {
+            if (player.length == 1 || controlCircle.direction !== "left") {
                 movement = "right";
             }
         }
         if (e.keyCode == 40) {
-            if (player.length == 1 || movement !== "up") {
+            if (player.length == 1 || controlCircle.direction !== "up") {
                 movement = "down";
             }
         }

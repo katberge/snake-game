@@ -183,9 +183,22 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // get new game button and add functionality
-    let newGameBtn = document.querySelector("button");
+    let newGameBtn = document.querySelector("#restart");
     newGameBtn.addEventListener("click", () => {
         location.reload(); // reloads page
+    });
+
+    //add functionality to pause/start button
+    let pauseBtn = document.querySelector("#pause");
+    let paused = false;
+    pauseBtn.addEventListener("click", () => {
+        if (paused == false) {
+            clearInterval(interval);
+            paused = true;
+        } else {
+            interval = setInterval(animate, 300);
+            paused = false;
+        }
     });
 
     // stop game if game over is true

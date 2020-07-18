@@ -207,6 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
         c.fillRect(0, 0, canvas.width, canvas.height);
         clearInterval(interval);
         document.querySelector("#game-over").style.display = "block";
+        pauseBtn.style.display = "none";
     };
 
 });

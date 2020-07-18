@@ -18,5 +18,8 @@ p {
 
 button {
     font-family: inherit;
+    display: block;
+    width: fit-content;
+    margin: auto;
     margin-bottom: 10px;
 }

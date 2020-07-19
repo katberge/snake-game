@@ -27,4 +27,15 @@ button {
     width: fit-content;
     margin: auto;
     margin-bottom: 10px;
+    background-color: #f969b2;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    box-shadow: 2px 2px #e66e70;
+    outline: none;
+}
+
+button:active {
+    box-shadow: none;
+    transform: translate(2px, 2px);
 }

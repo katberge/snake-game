@@ -9,6 +9,10 @@ canvas {
     border: 1px solid black;
 }
 
+#game-menu {
+    display: none;
+}
+
 #game-over {
     display: none;
 }

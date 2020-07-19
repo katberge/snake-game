@@ -140,30 +140,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // adds start menu functionality with different speed for three difficulties
     const startMenu = document.querySelector("#start-menu");
+    const gameMenu = document.querySelector("#game-menu");
     const easyBtn = document.querySelector("#easy");
     const medBtn = document.querySelector("#medium");
     const hardBtn = document.querySelector("#hard");
     easyBtn.addEventListener("click", () => {
         // get rid of start menu
         startMenu.style.display = "none";
-        // show canvas and start game
+        // show canvas, show game menu, and start game
         canvas.style.display = "initial";
+        gameMenu.style.display = "initial";
         milliseconds = 500;
         interval = setInterval(animate, milliseconds);
     });
     medBtn.addEventListener("click", () => {
         // get rid of start menu
         startMenu.style.display = "none";
-        // show canvas and start game
+        // show canvas, show game menu, and start game
         canvas.style.display = "initial";
+        gameMenu.style.display = "initial";
         milliseconds = 300;
         interval = setInterval(animate, milliseconds);
     });
     hardBtn.addEventListener("click", () => {
         // get rid of start menu
         startMenu.style.display = "none";
-        // show canvas and start game
+        // show canvas, show game menu, and start game
         canvas.style.display = "initial";
+        gameMenu.style.display = "initial";
         milliseconds = 100;
         interval = setInterval(animate, milliseconds);
     });

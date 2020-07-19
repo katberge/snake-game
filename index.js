@@ -134,6 +134,40 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // millisecond and interval variables
+    let milliseconds;
+    let interval;
+
+    // adds start menu functionality with different speed for three difficulties
+    const startMenu = document.querySelector("#start-menu");
+    const easyBtn = document.querySelector("#easy");
+    const medBtn = document.querySelector("#medium");
+    const hardBtn = document.querySelector("#hard");
+    easyBtn.addEventListener("click", () => {
+        // get rid of start menu
+        startMenu.style.display = "none";
+        // show canvas and start game
+        canvas.style.display = "initial";
+        milliseconds = 500;
+        interval = setInterval(animate, milliseconds);
+    });
+    medBtn.addEventListener("click", () => {
+        // get rid of start menu
+        startMenu.style.display = "none";
+        // show canvas and start game
+        canvas.style.display = "initial";
+        milliseconds = 300;
+        interval = setInterval(animate, milliseconds);
+    });
+    hardBtn.addEventListener("click", () => {
+        // get rid of start menu
+        startMenu.style.display = "none";
+        // show canvas and start game
+        canvas.style.display = "initial";
+        milliseconds = 100;
+        interval = setInterval(animate, milliseconds);
+    });
+
     // set interval for movement
     const animate = () => {
         c.clearRect(0, 0, canvas.width, canvas.height);
@@ -148,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
         collisionCheck();
         gameOver();
     };
-    let interval = setInterval(animate, 300);
+
 
     // check game over function
     const gameOver = () => {
@@ -196,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
             clearInterval(interval);
             paused = true;
         } else {
-            interval = setInterval(animate, 300);
+            interval = setInterval(animate, milliseconds);
             paused = false;
         }
     });

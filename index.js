@@ -141,32 +141,30 @@ document.addEventListener("DOMContentLoaded", () => {
     // assigns button to variables
     const startMenu = document.querySelector("#start-menu");
     const gameMenu = document.querySelector("#game-menu");
-    const easyBtn = document.querySelector("#easy");
-    const medBtn = document.querySelector("#medium");
-    const hardBtn = document.querySelector("#hard");
+
+    // start begin button as disabled
     const beginBtn = document.querySelector("#begin");
     beginBtn.disabled = true;
 
     // adds start menu functionality with different speed for three difficulties
-    easyBtn.addEventListener("click", () => {
-        milliseconds = 300;
-        beginBtn.disabled = false;
-    });
-    medBtn.addEventListener("click", () => {
-        milliseconds = 150;
-        beginBtn.disabled = false;
-    });
-    hardBtn.addEventListener("click", () => {
-        milliseconds = 60;
-        beginBtn.disabled = false;
-    });
-    beginBtn.addEventListener("click", () => {
-        // get rid of start menu
-        startMenu.style.display = "none";
-        // show canvas, show game menu, and start game
-        canvas.style.display = "initial";
-        gameMenu.style.display = "initial";
-        interval = setInterval(animate, milliseconds);
+    document.querySelector("#start-menu").addEventListener("click", (e) =>{
+        if (e.target.tagName === "BUTTON") {
+            beginBtn.disabled = false;
+            if (e.target.id === "easy") {
+                milliseconds = 300;
+            } else if (e.target.id === "medium") {
+                milliseconds = 150;
+            } else if (e.target.id === "hard") {
+                milliseconds = 60;
+            } else if (e.target.id === "begin") {
+                // get rid of start menu
+                startMenu.style.display = "none";
+                // show canvas, show game menu, and start game
+                canvas.style.display = "initial";
+                gameMenu.style.display = "initial";
+                interval = setInterval(animate, milliseconds);
+            }
+        }
     });
 
     // set interval for movement

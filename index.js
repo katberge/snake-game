@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // show canvas, show game menu, and start game
         canvas.style.display = "initial";
         gameMenu.style.display = "initial";
-        milliseconds = 500;
+        milliseconds = 300;
         interval = setInterval(animate, milliseconds);
     });
     medBtn.addEventListener("click", () => {
@@ -159,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // show canvas, show game menu, and start game
         canvas.style.display = "initial";
         gameMenu.style.display = "initial";
-        milliseconds = 300;
+        milliseconds = 150;
         interval = setInterval(animate, milliseconds);
     });
     hardBtn.addEventListener("click", () => {
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // show canvas, show game menu, and start game
         canvas.style.display = "initial";
         gameMenu.style.display = "initial";
-        milliseconds = 100;
+        milliseconds = 60;
         interval = setInterval(animate, milliseconds);
     });
 

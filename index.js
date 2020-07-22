@@ -138,37 +138,34 @@ document.addEventListener("DOMContentLoaded", () => {
     let milliseconds;
     let interval;
 
-    // adds start menu functionality with different speed for three difficulties
+    // assigns button to variables
     const startMenu = document.querySelector("#start-menu");
     const gameMenu = document.querySelector("#game-menu");
     const easyBtn = document.querySelector("#easy");
     const medBtn = document.querySelector("#medium");
     const hardBtn = document.querySelector("#hard");
+    const beginBtn = document.querySelector("#begin");
+    beginBtn.disabled = true;
+
+    // adds start menu functionality with different speed for three difficulties
     easyBtn.addEventListener("click", () => {
-        // get rid of start menu
-        startMenu.style.display = "none";
-        // show canvas, show game menu, and start game
-        canvas.style.display = "initial";
-        gameMenu.style.display = "initial";
         milliseconds = 300;
-        interval = setInterval(animate, milliseconds);
+        beginBtn.disabled = false;
     });
     medBtn.addEventListener("click", () => {
-        // get rid of start menu
-        startMenu.style.display = "none";
-        // show canvas, show game menu, and start game
-        canvas.style.display = "initial";
-        gameMenu.style.display = "initial";
         milliseconds = 150;
-        interval = setInterval(animate, milliseconds);
+        beginBtn.disabled = false;
     });
     hardBtn.addEventListener("click", () => {
+        milliseconds = 60;
+        beginBtn.disabled = false;
+    });
+    beginBtn.addEventListener("click", () => {
         // get rid of start menu
         startMenu.style.display = "none";
         // show canvas, show game menu, and start game
         canvas.style.display = "initial";
         gameMenu.style.display = "initial";
-        milliseconds = 60;
         interval = setInterval(animate, milliseconds);
     });
 

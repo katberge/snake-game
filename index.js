@@ -11,27 +11,26 @@ document.addEventListener("DOMContentLoaded", () => {
     let movement = "down";
     let control = (e) => {
         if (e.keyCode == 37) {
-            if (player.length === 1 || controlCircle.direction !== "right") {
+            if (player.length === 1 || player[0].direction !== "right") {
                 movement = "left";
             }
         }
         if (e.keyCode === 38) {
-            if (player.length === 1 || controlCircle.direction !== "down") {
+            if (player.length === 1 || player[0].direction !== "down") {
                 movement = "up";
             }
         }
         if (e.keyCode === 39) {
-            if (player.length === 1 || controlCircle.direction !== "left") {
+            if (player.length === 1 || player[0].direction !== "left") {
                 movement = "right";
             }
         }
         if (e.keyCode === 40) {
-            if (player.length === 1 || controlCircle.direction !== "up") {
+            if (player.length === 1 || player[0].direction !== "up") {
                 movement = "down";
             }
         }
     };
-    document.addEventListener("keyup", control);
 
     // color palette
     const bopColors = ["#f969b2", "#dcc147", "#1cba6f", "#21d0aa", "#16498a", "#2f2489", "#ef8429", "#e66e70", "#b11620", "#933153", "#2a374a"];
@@ -83,14 +82,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // create player array to add circles to
     const player = [];
-
-    // draw new circle in center of canvas
-    let thisColor = Math.floor(Math.random() * colors.length);
-    let controlCircle = new Circle(canvas.width / 2 + r, canvas.height / 2 + r, colors[thisColor]);
-    player.push(controlCircle);
+    // array for circles to hit
+    const targetArr = [];
 
     // make new circle
-    let newCircle;
     const makeCircle = () => {
         let x = Math.ceil(Math.random() * canvas.width / 10) * 10 - r;
         let y = Math.ceil(Math.random() * canvas.height / 10) * 10 - r;
@@ -100,12 +95,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 y = Math.ceil(Math.random() * canvas.height / 10) * 10 - r;
                 i = -1;
             }
+            if (targetArr.length > 0 && getDistance(x, y, targetArr[0]) < 2 * r) {
+                x = Math.ceil(Math.random() * canvas.width / 10) * 10 - r;
+                y = Math.ceil(Math.random() * canvas.height / 10) * 10 - r;
+                i = -1;
+            }
         }
         let index = Math.floor(Math.random() * colors.length);
-        newCircle = new Circle(x, y, colors[index]);
+        targetArr.push(new Circle(x, y, colors[index]));
     }
-    makeCircle();
-    newCircle.draw();
+
+    // starts the game by darwing the circles
+    const init = () => {
+        // draw player circle in center of canvas
+        let thisColor = Math.floor(Math.random() * colors.length);
+        player.push(new Circle(canvas.width / 2 + r, canvas.height / 2 + r, colors[thisColor]));
+
+        // draw two target circles
+        for (let i = 0; i < 2; i++) {
+            makeCircle();
+            targetArr[targetArr.length - 1].draw();
+        }
+
+        // allow controls
+        document.addEventListener("keyup", control);
+    }
 
     // create function to attach circle to the player string
     const attatch = (circle) => {
@@ -129,13 +143,15 @@ document.addEventListener("DOMContentLoaded", () => {
     let score = 0;
     // check collision
     const collisionCheck = () => {
-        if (getDistance(newCircle.x, newCircle.y, controlCircle) < 2 * r) {
-            attatch(newCircle);
-            player.push(newCircle);
-            makeCircle();
-            score++;
-            document.querySelector("#score").innerHTML = score;
-        }
+        targetArr.forEach(target => {
+            if (getDistance(target.x, target.y, player[0]) < 2 * r) {
+                attatch(target);
+                player.push(target);
+                makeCircle();
+                score++;
+                document.querySelector("#score").innerHTML = score;
+            }
+        }); 
     };
 
     // millisecond and interval variables
@@ -158,9 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (e.target.id === "begin") {
                 // get rid of start menu
                 startMenu.style.display = "none";
-                // show canvas, show game menu, and start game
+                // show canvas, show game menu, draw circles, and start game
                 canvas.style.display = "initial";
                 gameMenu.style.display = "initial";
+                init();
                 interval = setInterval(animate, milliseconds);
             } else if (e.target.id === "bop") {
                 colors = bopColors;
@@ -194,17 +211,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // set interval for movement
+    // animate function for movement
     const animate = () => {
         c.clearRect(0, 0, canvas.width, canvas.height);
         for (i = player.length - 1; i > 0; i--) {
             player[i].direction = player[i - 1].direction;
         }
-        controlCircle.direction = movement;
-        player.map(circle => {
+        player[0].direction = movement;
+        player.forEach(circle => {
             circle.update();  
         })
-        newCircle.draw();
+        targetArr.forEach(target => {
+            target.draw();
+        });
         collisionCheck();
         gameOver();
     };
@@ -216,22 +235,22 @@ document.addEventListener("DOMContentLoaded", () => {
         let answer;
 
         // if control circle hits wall
-        if (movement === "down" && canvas.height - controlCircle.y < r) {
+        if (movement === "down" && canvas.height - player[0].y < r) {
             answer = true;
         }
-        if (movement === "up" && controlCircle.y < r) {
+        if (movement === "up" && player[0].y < r) {
             answer = true;
         }
-        if (movement === "left" && controlCircle.x < r) {
+        if (movement === "left" && player[0].x < r) {
             answer = true;
         }
-        if (movement === "right" && canvas.width - controlCircle.x < r) {
+        if (movement === "right" && canvas.width - player[0].x < r) {
             answer = true;
         }
 
         // if control circle hits player/its tail
         for (i = 1; i < player.length; i++) {
-            let distance = getDistance(player[i].x, player[i].y , controlCircle);
+            let distance = getDistance(player[i].x, player[i].y , player[0]);
             if (distance < 2 * r) {
                 answer = true;
             }

@@ -251,7 +251,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.id === "restart") {
                 init();
             } if (e.target.id === "menu-button") {
-                location.reload(); // reloads page
+                const conf = confirm("This action will end your current game and you will lose your progress.");
+                if (conf) {
+                    location.reload(); // reloads page
+                }
             } else if (e.target.id === "pause") {
                 if (paused === false) {
                     clearInterval(interval);

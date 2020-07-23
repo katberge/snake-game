@@ -41,6 +41,16 @@ button:active {
     transform: translate(2px, 2px);
 }
 
+.default {
+    font-style: oblique;
+    font-size: 13px;
+}
+
+#preview-label {
+    font-size: 17px;
+    margin-top: 30px;
+}
+
 #begin {
     font-size: 20px;
     margin-top: 20px;

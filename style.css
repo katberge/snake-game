@@ -41,6 +41,11 @@ button:active {
     transform: translate(2px, 2px);
 }
 
+.selected {
+    box-shadow: none;
+    transform: translate(2px, 2px);
+}
+
 .default {
     font-style: oblique;
     font-size: 13px;

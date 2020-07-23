@@ -181,19 +181,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // assigns button to variables
     const startMenu = document.querySelector("#start-menu");
     const gameMenu = document.querySelector("#game-menu");
+    const diffBtns = Array.from(document.querySelectorAll(".diff-button"));
+    const colorBtns = Array.from(document.querySelectorAll(".color-button"));
 
     // adds start menu functionality with different speed for three difficulties
     document.querySelector("#start-menu").addEventListener("click", (e) =>{
         if (e.target.tagName === "BUTTON") {
             if (e.target.className === "diff-button") {
+                diffBtns.forEach(btn => {
+                    btn.classList.remove("selected");
+                });
                 if (e.target.id === "easy") {
                     milliseconds = 300;
                 } else if (e.target.id === "medium") {
                     milliseconds = 150;
                 } else if (e.target.id === "hard") {
                     milliseconds = 60;
-                } 
+                }
+                e.target.classList.add("selected"); 
             } if (e.target.className === "color-button") {
+                colorBtns.forEach(btn => {
+                    btn.classList.remove("selected");
+                });
                 if (e.target.id === "bop") {
                     colors = bopColors;
                 } else if (e.target.id === "cotton-candy") {
@@ -201,6 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else if (e.target.id === "cottage") {
                     colors = cottageColors;
                 }
+                e.target.classList.add("selected");
                 drawPreview();
             } else if (e.target.id === "begin") {
                 // get rid of start menu

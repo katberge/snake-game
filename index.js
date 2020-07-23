@@ -234,7 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // variable for if any of the tests are positive
         let answer;
 
-        // if control circle hits wall
+        // if snake head hits wall
         if (movement === "down" && canvas.height - player[0].y < r) {
             answer = true;
         }
@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
             answer = true;
         }
 
-        // if control circle hits player/its tail
+        // if snake head hits player/its tail
         for (i = 1; i < player.length; i++) {
             let distance = getDistance(player[i].x, player[i].y , player[0]);
             if (distance < 2 * r) {

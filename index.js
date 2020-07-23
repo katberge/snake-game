@@ -261,6 +261,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#game-menu").addEventListener("click", (e) =>{
         if (e.target.tagName === "BUTTON") {
             if (e.target.id === "restart") {
+                document.querySelector("#game-over").style.display = "none";
+                document.querySelector("#pause").style.display = "block";
                 init();
             } if (e.target.id === "menu-button") {
                 const conf = confirm("This action will end your current game and you will lose your progress.");

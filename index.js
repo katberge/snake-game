@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // color palette
     const bopColors = ["#f969b2", "#dcc147", "#1cba6f", "#21d0aa", "#16498a", "#2f2489", "#ef8429", "#e66e70", "#b11620", "#933153", "#2a374a"];
-    const ccColors = ["#ffafb8", "#ffafe0", "#ffc3f3", "#f6afff", "#d0a4ff", "#c6b5ff", "#c3c7ff", "#c3e5ff", "#c3fffb"];
+    const ccColors = ["#ffafb8", "#ffafe0", "#f6afff", "#d0a4ff", "#c6b5ff", "#c3c7ff", "#c3e5ff", "#c3fffb"];
     const cottageColors = ["#c4f0e8", "	#ffc1b1", "#ffe8b1", "#9bc99e", "#b6916b", "#d7def2", "#b66c6b", "#6b90b6", "#b1efff", "#c99bc6"];
     let colors = bopColors; // bopColors is default
 

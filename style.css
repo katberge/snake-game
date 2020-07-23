@@ -40,7 +40,7 @@ button:active,
 .selected {
     box-shadow: none;
     transform: translate(2px, 2px);
-    background-color: #e66e70;
+    background-color: #e66e70 !important;
 }
 
 #preview-label {

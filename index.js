@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const ccColors = ["#ffafb8", "#ffafe0", "#f6afff", "#d0a4ff", "#c6b5ff", "#c3c7ff", "#c3e5ff", "#c3fffb"];
     const cottageColors = ["#ffc1b1", "#ffe8b1", "#c4f0d2", "#b1efff", "#d7def2", "#9bc99e", "#6b90b6", "#c99bc6", "#b6916b", "#b66c6b"];
     const rainbowColors = ["#f01616", "#ff8000", "#f2f207", "#00ff00", "#00ffbf", "#00ffff", "#0080ff", "#0000ff", "#8000ff", "#ff00ff"];
-    const darkColors = ["#066832", "#3ba771", "#007883", "#142943", "#572e5b", "#68063c", "#a73b99", "#830b00", "#a73b3b", "#a7713b"];
+    const darkColors = ["#3ba771", "#066832", "#007883", "#142943", "#572e5b", "#68063c", "#a73b99", "#830b00", "#a73b3b", "#a7713b"];
     let colors;
 
     // sets radius
@@ -233,11 +233,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 drawPreview();
                 buttons.forEach(btn => {
                     btn.style.backgroundColor = colors[0];
-                    if (colors === darkColors) {
-                        btn.style.color = "#f0f0f0";
-                    } else {
-                        btn.style.color = "initial";
-                    }
+                    // if (colors === darkColors) {
+                    //     btn.style.color = "#f0f0f0";
+                    // } else {
+                    //     btn.style.color = "initial";
+                    // }
                 });
             } else if (e.target.id === "begin") {
                 // get rid of start menu

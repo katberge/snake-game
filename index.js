@@ -11,22 +11,22 @@ document.addEventListener("DOMContentLoaded", () => {
     let movement = "down";
     let control = (e) => {
         if (e.keyCode == 37) {
-            if (player.length == 1 || controlCircle.direction !== "right") {
+            if (player.length === 1 || controlCircle.direction !== "right") {
                 movement = "left";
             }
         }
-        if (e.keyCode == 38) {
-            if (player.length == 1 || controlCircle.direction !== "down") {
+        if (e.keyCode === 38) {
+            if (player.length === 1 || controlCircle.direction !== "down") {
                 movement = "up";
             }
         }
-        if (e.keyCode == 39) {
-            if (player.length == 1 || controlCircle.direction !== "left") {
+        if (e.keyCode === 39) {
+            if (player.length === 1 || controlCircle.direction !== "left") {
                 movement = "right";
             }
         }
-        if (e.keyCode == 40) {
-            if (player.length == 1 || controlCircle.direction !== "up") {
+        if (e.keyCode === 40) {
+            if (player.length === 1 || controlCircle.direction !== "up") {
                 movement = "down";
             }
         }
@@ -53,11 +53,11 @@ document.addEventListener("DOMContentLoaded", () => {
             c.fill();
         };
         this.update = () => {
-            if (this.direction == "down") {
+            if (this.direction === "down") {
                 this.y += 10;
-            } else if (this.direction == "up") {
+            } else if (this.direction === "up") {
                 this.y -= 10;
-            } else if (this.direction == "left") {
+            } else if (this.direction === "left") {
                 this.x -= 10;
             } else {
                 this.x += 10;
@@ -106,13 +106,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // create function to attach circle to the player string
     const attatch = (circle) => {
         let previous = player[player.length - 1];
-        if (previous.direction == "down") {
+        if (previous.direction === "down") {
             circle.x = previous.x;
             circle.y = previous.y - 2 * r;
-        } else if (previous.direction == "up") {
+        } else if (previous.direction === "up") {
             circle.x = previous.x;
             circle.y = previous.y + 2 * r;
-        } else if (previous.direction == "left") {
+        } else if (previous.direction === "left") {
             circle.y = previous.y;
             circle.x = previous.x + 2 * r;
         } else {
@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.id === "restart") {
                 location.reload(); // reloads page
             } else if (e.target.id === "pause") {
-                if (paused == false) {
+                if (paused === false) {
                     clearInterval(interval);
                     paused = true;
                     pauseBtn.innerHTML = "Start";
@@ -211,16 +211,16 @@ document.addEventListener("DOMContentLoaded", () => {
         let answer;
 
         // if control circle hits wall
-        if (movement == "down" && canvas.height - controlCircle.y < r) {
+        if (movement === "down" && canvas.height - controlCircle.y < r) {
             answer = true;
         }
-        if (movement == "up" && controlCircle.y < r) {
+        if (movement === "up" && controlCircle.y < r) {
             answer = true;
         }
-        if (movement == "left" && controlCircle.x < r) {
+        if (movement === "left" && controlCircle.x < r) {
             answer = true;
         }
-        if (movement == "right" && canvas.width - controlCircle.x < r) {
+        if (movement === "right" && canvas.width - controlCircle.x < r) {
             answer = true;
         }
 
@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 answer = true;
             }
         }
-        if (answer == true) {
+        if (answer === true) {
             stopGame();
         }
 

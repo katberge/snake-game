@@ -167,6 +167,28 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // initializes paused variable
+    let paused = false;
+
+    // adds functionality to game menu buttons (pause/play and new game)
+    document.querySelector("#game-menu").addEventListener("click", (e) =>{
+        if (e.target.tagName === "BUTTON") {
+            if (e.target.id === "restart") {
+                location.reload(); // reloads page
+            } else if (e.target.id === "pause") {
+                if (paused == false) {
+                    clearInterval(interval);
+                    paused = true;
+                    pauseBtn.innerHTML = "Start";
+                } else {
+                    interval = setInterval(animate, milliseconds);
+                    paused = false;
+                    pauseBtn.innerHTML = "Pause";
+                }
+            }
+        }
+    });
+
     // set interval for movement
     const animate = () => {
         c.clearRect(0, 0, canvas.width, canvas.height);
@@ -214,27 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     };
-
-    // get new game button and add functionality
-    let newGameBtn = document.querySelector("#restart");
-    newGameBtn.addEventListener("click", () => {
-        location.reload(); // reloads page
-    });
-
-    //add functionality to pause/start button
-    let pauseBtn = document.querySelector("#pause");
-    let paused = false;
-    pauseBtn.addEventListener("click", () => {
-        if (paused == false) {
-            clearInterval(interval);
-            paused = true;
-            pauseBtn.innerHTML = "Start";
-        } else {
-            interval = setInterval(animate, milliseconds);
-            paused = false;
-            pauseBtn.innerHTML = "Pause";
-        }
-    });
 
     // stop game if game over is true
     const stopGame = () => {

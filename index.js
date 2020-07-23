@@ -101,10 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
     };
 
-    // create player array to add circles to
-    const player = [];
-    // array for circles to hit
-    const targetArr = [];
+    // create player array to add circles to and target array for circles to hit
+    let player = [];
+    let targetArr = [];
 
     // make new circle
     const makeCircle = () => {
@@ -128,6 +127,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // starts the game by darwing the circles
     const init = () => {
+        // clear possible old interval and circles
+        clearInterval(interval);
+        c.clearRect(0, 0, canvas.width, canvas.height);
+        player = [];
+        targetArr = [];
+
         // draw player circle in center of canvas
         let thisColor = Math.floor(Math.random() * colors.length);
         player.push(new Circle(canvas.width / 2 + r, canvas.height / 2 + r, colors[thisColor], c));
@@ -140,6 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // allow controls
         document.addEventListener("keyup", control);
+
+        //start interval 
+        interval = setInterval(animate, milliseconds);
     }
 
     // create function to attach circle to the player string
@@ -226,7 +234,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 canvas.style.display = "initial";
                 gameMenu.style.display = "initial";
                 init();
-                interval = setInterval(animate, milliseconds);
             }
             let selectedArr = Array.from(document.querySelectorAll(".selected"));
             if (selectedArr.length > 1) {
@@ -242,6 +249,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#game-menu").addEventListener("click", (e) =>{
         if (e.target.tagName === "BUTTON") {
             if (e.target.id === "restart") {
+                init();
+            } if (e.target.id === "menu-button") {
                 location.reload(); // reloads page
             } else if (e.target.id === "pause") {
                 if (paused === false) {

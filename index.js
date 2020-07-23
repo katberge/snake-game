@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const bopColors = ["#f969b2", "#e66e70", "#ef8429", "#dcc147", "#1cba6f", "#21d0aa", "#16498a", "#2f2489", "#2a374a", "#933153", "#b11620"];
     const ccColors = ["#ffafb8", "#ffafe0", "#f6afff", "#d0a4ff", "#c6b5ff", "#c3c7ff", "#c3e5ff", "#c3fffb"];
     const cottageColors = ["#ffc1b1", "#ffe8b1", "#c4f0d2", "#b1efff", "#d7def2", "#9bc99e", "#6b90b6", "#c99bc6", "#b6916b", "#b66c6b"];
-    const rainbowColors = ["#ff0000", "#ff8000", "#f2f207", "#00ff00", "#00ffbf", "#00ffff", "#0080ff", "#0000ff", "#8000ff", "#ff00ff"];
+    const rainbowColors = ["#f01616", "#ff8000", "#f2f207", "#00ff00", "#00ffbf", "#00ffff", "#0080ff", "#0000ff", "#8000ff", "#ff00ff"];
     const darkColors = ["#066832", "#3ba771", "#007883", "#142943", "#572e5b", "#68063c", "#a73b99", "#830b00", "#a73b3b", "#a7713b"];
     let colors;
 
@@ -193,6 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // assigns button to variables
     const startMenu = document.querySelector("#start-menu");
     const gameMenu = document.querySelector("#game-menu");
+    const buttons = Array.from(document.querySelectorAll("button"));
     const diffBtns = Array.from(document.querySelectorAll(".diff-button"));
     const colorBtns = Array.from(document.querySelectorAll(".color-button"));
     const beginBtn = document.querySelector("#begin");
@@ -230,6 +231,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 e.target.classList.add("selected");
                 drawPreview();
+                buttons.forEach(btn => {
+                    btn.style.backgroundColor = colors[0];
+                    if (colors === darkColors) {
+                        btn.style.color = "#f0f0f0";
+                    } else {
+                        btn.style.color = "initial";
+                    }
+                });
             } else if (e.target.id === "begin") {
                 // get rid of start menu
                 startMenu.style.display = "none";

@@ -86,7 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
         colorPrevCircles[colorPrevCircles.length - 1].draw(); // draw newly pushed circle
         }
     }
-    drawPreview();
 
 
     // get distance between circles
@@ -183,6 +182,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const gameMenu = document.querySelector("#game-menu");
     const diffBtns = Array.from(document.querySelectorAll(".diff-button"));
     const colorBtns = Array.from(document.querySelectorAll(".color-button"));
+    const beginBtn = document.querySelector("#begin");
+    beginBtn.disabled = true;
 
     // adds start menu functionality with different speed for three difficulties
     document.querySelector("#start-menu").addEventListener("click", (e) =>{
@@ -220,6 +221,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 gameMenu.style.display = "initial";
                 init();
                 interval = setInterval(animate, milliseconds);
+            }
+            let selectedArr = Array.from(document.querySelectorAll(".selected"));
+            if (selectedArr.length > 1) {
+                beginBtn.disabled = false;
             }
         }
     });

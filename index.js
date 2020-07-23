@@ -185,12 +185,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // adds start menu functionality with different speed for three difficulties
     document.querySelector("#start-menu").addEventListener("click", (e) =>{
         if (e.target.tagName === "BUTTON") {
-            if (e.target.id === "easy") {
-                milliseconds = 300;
-            } else if (e.target.id === "medium") {
-                milliseconds = 150;
-            } else if (e.target.id === "hard") {
-                milliseconds = 60;
+            if (e.target.className === "diff-button") {
+                if (e.target.id === "easy") {
+                    milliseconds = 300;
+                } else if (e.target.id === "medium") {
+                    milliseconds = 150;
+                } else if (e.target.id === "hard") {
+                    milliseconds = 60;
+                } 
+            } if (e.target.className === "color-button") {
+                if (e.target.id === "bop") {
+                    colors = bopColors;
+                } else if (e.target.id === "cotton-candy") {
+                    colors = ccColors;
+                } else if (e.target.id === "cottage") {
+                    colors = cottageColors;
+                }
+                drawPreview();
             } else if (e.target.id === "begin") {
                 // get rid of start menu
                 startMenu.style.display = "none";
@@ -199,15 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 gameMenu.style.display = "initial";
                 init();
                 interval = setInterval(animate, milliseconds);
-            } else if (e.target.id === "bop") {
-                colors = bopColors;
-                drawPreview();
-            } else if (e.target.id === "cotton-candy") {
-                colors = ccColors;
-                drawPreview();
-            } else if (e.target.id === "cottage") {
-                colors = cottageColors;
-                drawPreview();
             }
         }
     });

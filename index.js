@@ -34,8 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keyup", control);
 
     // color palette
-    const colors = ["#f969b2", "#dcc147", "#1cba6f", "#21d0aa", "#16498a", "#2f2489", "#ef8429", "#e66e70", "#b11620", "#933153", "#2a374a"];
+    const bopColors = ["#f969b2", "#dcc147", "#1cba6f", "#21d0aa", "#16498a", "#2f2489", "#ef8429", "#e66e70", "#b11620", "#933153", "#2a374a"];
+    const ccColors = ["#ffc3f3", "#f6afff", "#d0a4ff", "#c6b5ff", "	#c3c7ff", "#c3e5ff"];
+    const cottageColors = ["#c4f0e8", "	#ffc1b1", "#f2ebd7", "#9bc99e", "#b6916b", "#d7def2", "#b66c6b", "#6b90b6", "#b1efff", "#c99bc6"];
+    let colors = bopColors;
 
+    // sets radius
     let r = 5;
     // add a circle constructor
     function Circle(x, y, color) {
@@ -135,21 +139,16 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // millisecond and interval variables
-    let milliseconds;
+    let milliseconds = 150; // default difficulty is medium
     let interval;
 
     // assigns button to variables
     const startMenu = document.querySelector("#start-menu");
     const gameMenu = document.querySelector("#game-menu");
 
-    // start begin button as disabled
-    const beginBtn = document.querySelector("#begin");
-    beginBtn.disabled = true;
-
     // adds start menu functionality with different speed for three difficulties
     document.querySelector("#start-menu").addEventListener("click", (e) =>{
         if (e.target.tagName === "BUTTON") {
-            beginBtn.disabled = false;
             if (e.target.id === "easy") {
                 milliseconds = 300;
             } else if (e.target.id === "medium") {
@@ -163,6 +162,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 canvas.style.display = "initial";
                 gameMenu.style.display = "initial";
                 interval = setInterval(animate, milliseconds);
+            } else if (e.target.id === "bop") {
+                colors = bopColors;
+            } else if (e.target.id === "cotton-candy") {
+                colors = ccColors;
+            } else if (e.target.id === "cottage") {
+                colors = cottageColors;
             }
         }
     });

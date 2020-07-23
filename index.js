@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const canvas = document.querySelector("canvas");
+    const canvas = document.querySelector("#main-canvas");
     const c = canvas.getContext("2d");
 
     // set width of canvas to 300px
@@ -34,26 +34,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // color palette
     const bopColors = ["#f969b2", "#dcc147", "#1cba6f", "#21d0aa", "#16498a", "#2f2489", "#ef8429", "#e66e70", "#b11620", "#933153", "#2a374a"];
-    const ccColors = ["#ffc3f3", "#f6afff", "#d0a4ff", "#c6b5ff", "	#c3c7ff", "#c3e5ff"];
+    const ccColors = ["#ffafb8", "#ffafe0", "#ffc3f3", "#f6afff", "#d0a4ff", "#c6b5ff", "#c3c7ff", "#c3e5ff", "#c3fffb"];
     const cottageColors = ["#c4f0e8", "	#ffc1b1", "#ffe8b1", "#9bc99e", "#b6916b", "#d7def2", "#b66c6b", "#6b90b6", "#b1efff", "#c99bc6"];
-    let colors = bopColors;
+    let colors = bopColors; // bopColors is default
 
     // sets radius
     let r = 5;
     // add a circle constructor
-    function Circle(x, y, color) {
+    function Circle(x, y, color, context) {
         this.x = x;
         this.y = y;
         this.color = color;
         this.r = r; // radius
         this.direction = movement;
         this.draw = () => {
-            c.beginPath();
-            c.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
-            c.strokeStyle = this.color;
-            c.stroke();
-            c.fillStyle = this.color;
-            c.fill();
+            context.beginPath();
+            context.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
+            context.strokeStyle = this.color;
+            context.stroke();
+            context.fillStyle = this.color;
+            context.fill();
         };
         this.update = () => {
             if (this.direction === "down") {
@@ -68,6 +68,26 @@ document.addEventListener("DOMContentLoaded", () => {
             this.draw();
         }
     };
+
+
+    // color preview canvas set up
+    const colorCanvas = document.querySelector("#color-canvas");
+    const colorContext = colorCanvas.getContext("2d");
+
+    // set width and height for color preview
+    colorCanvas.width = 300;
+    colorCanvas.height = 50;
+    let colorPrevCircles = [];
+    const drawPreview = () => {
+        colorContext.clearRect(0, 0, colorCanvas.width, colorCanvas.height);
+        for (let i = 0; i < colors.length; i++) {
+        let x = (i * 10) + (colorCanvas.width / 2) - (colors.length * 5);
+        colorPrevCircles.push(new Circle(x, 25, colors[i], colorContext));
+        colorPrevCircles[colorPrevCircles.length - 1].draw(); // draw newly pushed circle
+        }
+    }
+    drawPreview();
+
 
     // get distance between circles
     const getDistance = (x, y, circle) => {
@@ -102,14 +122,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         let index = Math.floor(Math.random() * colors.length);
-        targetArr.push(new Circle(x, y, colors[index]));
+        targetArr.push(new Circle(x, y, colors[index], c));
     }
 
     // starts the game by darwing the circles
     const init = () => {
         // draw player circle in center of canvas
         let thisColor = Math.floor(Math.random() * colors.length);
-        player.push(new Circle(canvas.width / 2 + r, canvas.height / 2 + r, colors[thisColor]));
+        player.push(new Circle(canvas.width / 2 + r, canvas.height / 2 + r, colors[thisColor], c));
 
         // draw two target circles
         for (let i = 0; i < 2; i++) {
@@ -181,10 +201,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 interval = setInterval(animate, milliseconds);
             } else if (e.target.id === "bop") {
                 colors = bopColors;
+                drawPreview();
             } else if (e.target.id === "cotton-candy") {
                 colors = ccColors;
+                drawPreview();
             } else if (e.target.id === "cottage") {
                 colors = cottageColors;
+                drawPreview();
             }
         }
     });

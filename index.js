@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const drawPreview = () => {
         colorContext.clearRect(0, 0, colorCanvas.width, colorCanvas.height);
         for (let i = 0; i < colors.length; i++) {
-        let x = (i * 10) + (colorCanvas.width / 2) - (colors.length * 5);
+        let x = (i * 15) + 7.5 + (colorCanvas.width / 2) - (colors.length * 7.5);
         colorPrevCircles.push(new Circle(x, 25, colors[i], colorContext));
         colorPrevCircles[colorPrevCircles.length - 1].draw(); // draw newly pushed circle
         }

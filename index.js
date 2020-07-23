@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const bopColors = ["#f969b2", "#e66e70", "#ef8429", "#dcc147", "#1cba6f", "#21d0aa", "#16498a", "#2f2489", "#2a374a", "#933153", "#b11620"];
     const ccColors = ["#ffafb8", "#ffafe0", "#f6afff", "#d0a4ff", "#c6b5ff", "#c3c7ff", "#c3e5ff", "#c3fffb"];
     const cottageColors = ["#ffc1b1", "#ffe8b1", "#c4f0d2", "#b1efff", "#d7def2", "#9bc99e", "#6b90b6", "#c99bc6", "#b6916b", "#b66c6b"];
+    let colors;
 
     // sets radius
     let r = 5;

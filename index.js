@@ -133,6 +133,9 @@ document.addEventListener("DOMContentLoaded", () => {
         player = [];
         targetArr = [];
 
+        // reset starting movement
+        movement = "down";
+
         // draw player circle in center of canvas
         let thisColor = Math.floor(Math.random() * colors.length);
         player.push(new Circle(canvas.width / 2 + r, canvas.height / 2 + r, colors[thisColor], c));

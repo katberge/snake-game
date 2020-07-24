@@ -275,11 +275,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (paused === false) {
                     clearInterval(interval);
                     paused = true;
-                    pauseBtn.innerHTML = "Start";
+                    e.target.innerHTML = "Start";
                 } else {
                     interval = setInterval(animate, milliseconds);
                     paused = false;
-                    pauseBtn.innerHTML = "Pause";
+                    e.target.innerHTML = "Pause";
                 }
             }
         }

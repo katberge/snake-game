@@ -235,11 +235,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 drawPreview();
                 buttons.forEach(btn => {
                     btn.style.backgroundColor = colors[0];
-                    // if (colors === darkColors) {
-                    //     btn.style.color = "#f0f0f0";
-                    // } else {
-                    //     btn.style.color = "initial";
-                    // }
                 });
             } else if (e.target.id === "begin") {
                 // get rid of start menu

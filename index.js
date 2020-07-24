@@ -133,8 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
         player = [];
         targetArr = [];
 
-        // reset starting movement
+        // reset starting movement and score
         movement = "down";
+        score = 0;
+        document.querySelector("#score").innerHTML = score;
 
         // draw player circle in center of canvas
         let thisColor = Math.floor(Math.random() * colors.length);
